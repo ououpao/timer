@@ -1,0 +1,29 @@
+<view wx:if="{{!completed}}" class="container timer {{isRuning ? 'timer--runing': ''}}">
+	<view class="timer_main">
+		 <view class="timer_time-wrap">
+			 	<text class="timer_time">{{remainTimeText}}</text>
+			 	<!-- <image style="width: 50px;height: 50px;" src="../../image/work.png"></image> -->
+		 </view>
+		 <input 
+		 	type="text" 
+		 	placeholder-style="text-align:center" 
+		 	class="timer_inputname" 
+		 	bindinput="setTaskName"
+		 	placeholder="给您的任务取个名字吧"/>
+	</view>
+	
+	<view class="timer_footer">
+	  <view bindtap="changeTimer" class="timer_ctrl" >{{isRuning ? 'Done': 'Work'}}</view>
+	  <view bindtap="changeTimer" class="timer_ctrl {{isRuning? 'hide' : ''}}" >Rest</view>
+	</view>
+	<action-sheet hidden="{{hideSheetTab}}" bindchange="switchSheetTap">
+		<action-sheet-item class="sheet_item" bindtap="linkToLog">设置</action-sheet-item>
+		<action-sheet-item class="sheet_item" bindtap="linkToLog">任务历史</action-sheet-item>
+	  <action-sheet-cancel class="cancel sheet_item">取消</action-sheet-cancel>
+	</action-sheet>
+</view>
+
+<view wx:if="{{completed}}" class="container">
+	<text>done!</text>
+</view>
+

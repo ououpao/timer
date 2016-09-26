@@ -1,0 +1,38 @@
+view,
+sroll-view,
+swiper,
+icon,
+text,
+progress,
+button,
+checkbox,
+form,
+input,
+label,
+input,
+picker,
+radio,
+slider,
+switch,
+action-sheet,
+modal,
+toast,
+loading,
+navigator,
+audio,
+image,
+video,
+map,
+canvas {
+  box-sizing: border-box;
+}
+
+.hide {
+	display: none!important;
+}
+
+.container {
+  font: 14px "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  height: 100%;
+  background-color: #fff;
+}

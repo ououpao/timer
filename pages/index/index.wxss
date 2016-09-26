@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.timer_main {
+  position: relative;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+  margin-top: -45px;
+  text-align: center;
+  background-color: #3197ed;
+  transition: all 1s;
+  z-index: 1;
+}
+
+.timer_time-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  transition: all .3s;
+}
+
+.timer_time {
+  font-size: 40px;
+  color: #fff;
+}
+
+.timer_inputname {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  padding-left: 10px;
+  border-bottom: 1px solid #f2f2f2;
+  color: #999;
+}
+
+.timer_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding-top: 40px;
+  transition: all .3s;
+}
+
+.timer_footer > button {}
+
+.timer .timer_ctrl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  /*color: #3197ed;*/
+  /*border: 1px solid #3197ed;*/
+  width: 80px;
+  height: 80px;
+  margin: 0 20px;
+  border-radius: 50%;
+  transition: all .7s;
+  background-color: #48c23d;
+}
+
+.timer .timer_ctrl text {}
+
+
+/*runing style*/
+
+.timer--runing .timer_main {}
+
+.timer--runing .timer_time-wrap {
+  width: 200px;
+  height: 200px;
+}
+
+.timer--runing .timer_footer {
+  flex: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.timer--runing .timer_ctrl {
+  background-color: transparent;
+  height: 30px;
+  margin-bottom: 30px;
+  border: 1px dashed #dedede;
+  border-radius: 20px;
+}
