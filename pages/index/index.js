@@ -2,7 +2,7 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     hideSheetTab: true,
-    initTime: '25:00',
+    workTime: '25:00',
     remainTimeText: '',
     log: {},
     timer: null,
@@ -10,13 +10,17 @@ Page({
     isRuning: false
   },
 
-  onLoad: function() {
-    this.data.remainTimeText = this.data.initTime
+  onShow: function() {
+    this.setData({
+      workTime: wx.getStorageSync('workTime') || 25,
+      restTime: wx.getStorageSync('restTime') || 5
+    })
+    this.data.remainTimeText = this.data.workTime + ':00'
   },
 
   changeTimer: function() {
     this.data.timer && this.stopTimer()
-    let keepTime = parseInt(this.data.initTime) * 60 * 1000
+    let keepTime = parseInt(this.data.workTime) * 60 * 1000
     let startTime = Date.now()
 
     if (this.data.isRuning) {
@@ -27,7 +31,7 @@ Page({
         type: 'rest'
       }
       this.setData({
-        remainTimeText: this.data.initTime
+        remainTimeText: this.data.workTime  + ':00'
       })
     } else {
       this.data.log = {

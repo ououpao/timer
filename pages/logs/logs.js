@@ -3,6 +3,11 @@ Page({
   data: {
     logs: []
   },
+  onReady: function() {
+    wx.setNavigationBarTitle({
+      title: '设置'
+    })
+  },
   onShow: function() {
   	console.log(2)
   },

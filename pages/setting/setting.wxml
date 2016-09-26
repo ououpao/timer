@@ -1,0 +1,56 @@
+<view class="container">
+	<view class="section">
+	  <text class="section_title">工作时长(分钟)</text>
+	  <view class="section_body">
+	    <slider 
+	    	bindchange="changeWorkTime" 
+	    	show-value="true" 
+	    	min="5"
+	    	max="60"
+	    	value="{{workTime}}"
+	    	left-icon="cancel" 
+	    	right-icon="success_no_circle"/>
+	  </view>
+	</view>
+
+	<view class="section">
+	  <text class="section_title">休息时长(分钟)</text>
+	  <view class="section_body">
+	    <slider 
+	    	bindchange="changeRestTime" 
+	    	show-value="true" 
+	    	min="5"
+	    	max="60"
+	    	value="{{restTime}}"
+	    	left-icon="cancel" 
+	    	right-icon="success_no_circle"/>
+	  </view>
+	</view>
+
+	<view class="section">
+	  <text class="section_title">休息时长(分钟)</text>
+	  <view class="section_body">
+	    <slider 
+	    	bindchange="slider1change" 
+	    	show-value="true" 
+	    	min="5"
+	    	max="60"
+	    	value="25"
+	    	left-icon="cancel" 
+	    	right-icon="success_no_circle"/>
+	  </view>
+	</view>
+
+	<view class="section">
+	  <view class="section_title">
+	  	<switch class="section_check" type="checkbox" size="mini" checked bindchange="switch1Change"/>
+	  	<text>启用铃声</text>
+	  </view>
+	  <view class="section_body">
+	  	<text bindtab="" class="section_tip">选择铃声 > </text>
+	  </view>
+	</view>
+
+	
+
+</view>

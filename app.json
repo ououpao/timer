@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/setting/setting"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,7 +26,7 @@
       "selectedIconPath": "image/wechatHL.png",
       "text": "记录"
     }, {
-      "pagePath": "pages/logs/logs",
+      "pagePath": "pages/setting/setting",
       "iconPath": "image/wechat.png",
       "selectedIconPath": "image/wechatHL.png",
       "text": "设置"
