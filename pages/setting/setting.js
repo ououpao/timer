@@ -4,8 +4,8 @@ Page({
       title: '设置'
     })
     this.setData({
-    	workTime: wx.getStorageSync('workTime') || 25,
-    	restTime: wx.getStorageSync('restTime') || 5
+    	workTime: wx.getStorageSync('workTime'),
+    	restTime: wx.getStorageSync('restTime')
     })
   },
   changeWorkTime: function(e) {

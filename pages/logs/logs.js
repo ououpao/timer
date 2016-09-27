@@ -3,13 +3,10 @@ Page({
   data: {
     logs: []
   },
-  onReady: function() {
-    wx.setNavigationBarTitle({
-      title: '设置'
-    })
-  },
   onShow: function() {
-  	console.log(2)
+    wx.setNavigationBarTitle({
+      title: '任务记录'
+    })
   },
   onLoad: function () {
     this.setData({

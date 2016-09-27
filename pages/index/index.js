@@ -2,57 +2,58 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     hideSheetTab: true,
-    workTime: '25:00',
     remainTimeText: '',
+    timerType: 'work',
     log: {},
-    timer: null,
     completed: false,
     isRuning: false
   },
 
   onShow: function() {
+    if(this.data.isRuning) return
+    let workTime = wx.getStorageSync('workTime')
+    let restTime = wx.getStorageSync('restTime')
     this.setData({
-      workTime: wx.getStorageSync('workTime') || 25,
-      restTime: wx.getStorageSync('restTime') || 5
+      workTime: workTime,
+      restTime: restTime,
+      remainTimeText: workTime + ':00'
     })
-    this.data.remainTimeText = this.data.workTime + ':00'
   },
 
-  changeTimer: function() {
-    this.data.timer && this.stopTimer()
-    let keepTime = parseInt(this.data.workTime) * 60 * 1000
-    let startTime = Date.now()
+  startTimer: function(e) {
 
-    if (this.data.isRuning) {
-      this.data.log = {
-        name: this.logName,
-        startTime: Date.now(),
-        action: 'stop',
-        type: 'rest'
-      }
-      this.setData({
-        remainTimeText: this.data.workTime  + ':00'
-      })
+    let startTime = Date.now()
+    let isRuning = this.data.isRuning
+    let timerType = e.target.dataset.type
+    let showTime = this.data[timerType + 'Time']
+    let keepTime =  showTime * 60 * 1000
+
+    if (isRuning) {
+      this.stopTimer()
     } else {
-      this.data.log = {
-        name: this.logName,
-        startTime: Date.now(),
-        keepTime: keepTime,
-        endTime: keepTime + startTime,
-        action: 'start',
-        type: 'task'
-      }
-      this.data.timer = setInterval(this.updateTime.bind(this), 1000)
+      this.timer = setInterval(this.updateTimer.bind(this), 1000)
     }
 
     this.setData({
-      isRuning: !this.data.isRuning
+      isRuning: !isRuning,
+      timerType: timerType,
+      remainTimeText: showTime + ':00'
     })
+
+    this.data.log = {
+      name: this.logName,
+      startTime: Date.now(),
+      keepTime: keepTime,
+      endTime: keepTime + startTime,
+      action: isRuning ? 'stop' : 'start',
+      type: timerType
+    }
+
     this.saveLog(this.data.log)
   },
 
   stopTimer: function() {
-    clearInterval(this.data.timer)
+    this.timer && clearInterval(this.timer)
   },
 
   setlogName: function(e) {
@@ -65,7 +66,7 @@ Page({
     })
   },
 
-  updateTime: function() {
+  updateTimer: function() {
     let log = this.data.log
     let now = Date.now()
     let remainingTime = Math.round((log.endTime - now) / 1000)

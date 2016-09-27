@@ -13,8 +13,15 @@
 	</view>
 	
 	<view class="timer_footer">
-	  <view bindtap="changeTimer" class="timer_ctrl" >{{isRuning ? '完成': '工作'}}</view>
-	  <view bindtap="changeTimer" class="timer_ctrl {{isRuning? 'hide' : ''}}" >休息</view>
+	  <view 
+	  	bindtap="startTimer" 
+	  	data-type="work" 
+	  	class="timer_ctrl {{isRuning && timerType == 'rest' ? 'hide' : ''}}" >{{isRuning ? '完成': '工作'}}</view>
+
+	  <view 
+	  	bindtap="startTimer" 
+	  	data-type="rest" 
+	  	class="timer_ctrl {{isRuning && timerType == 'work' ? 'hide' : ''}}" >{{isRuning ? '完成': '休息'}}</view>
 	</view>
 	<action-sheet hidden="{{hideSheetTab}}" bindchange="switchSheetTap">
 		<action-sheet-item class="sheet_item" bindtap="linkToLog">设置</action-sheet-item>

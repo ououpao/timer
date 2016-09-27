@@ -1,14 +1,25 @@
 //app.js
 App({
   globalData: {
-    userInfo: null
+    userInfo: null,
+    defaultWorkTime: 25,
+    defaultRestTime: 5
   },
   onLaunch: function() {
-    // //调用API从本地缓存中获取数据
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
-    this.setTime()
+    let workTime = wx.getStorageSync('workTime')
+    let restTime = wx.getStorageSync('restTime')
+    if(!workTime) {
+      wx.setStorage({
+        key: 'workTime',
+        data: this.globalData.defaultWorkTime
+      })
+    }
+    if(!restTime) {
+      wx.setStorage({
+        key: 'restTime',
+        data: this.globalData.defaultRestTime
+      })
+    }
   },
   getUserInfo: function(cb) {
     var that = this;
@@ -29,7 +40,6 @@ App({
     }
   },
   setTime: function() {
-    this.globalData.workTime = wx.getStorageSync('workTime') || 25
-    this.globalData.restTime = wx.getStorageSync('restTime') || 5
+    
   }
 })
