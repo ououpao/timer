@@ -3,6 +3,7 @@
   height: 100%;
   flex-direction: column;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .timer_main {
@@ -14,7 +15,7 @@
   margin-top: -45px;
   text-align: center;
   background-color: #3197ed;
-  transition: all 1s;
+  transition: all .5s;
   z-index: 1;
 }
 
@@ -79,7 +80,9 @@
 
 /*runing style*/
 
-.timer--runing .timer_main {}
+.timer--runing .timer_main {
+	flex:1;
+}
 
 .timer--runing .timer_time-wrap {
   width: 200px;

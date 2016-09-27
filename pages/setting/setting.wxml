@@ -1,5 +1,5 @@
 <view class="container">
-	<view class="section">
+	<view class="section panel">
 	  <text class="section_title">工作时长(分钟)</text>
 	  <view class="section_body">
 	    <slider 
@@ -13,7 +13,7 @@
 	  </view>
 	</view>
 
-	<view class="section">
+	<view class="section panel">
 	  <text class="section_title">休息时长(分钟)</text>
 	  <view class="section_body">
 	    <slider 
@@ -27,7 +27,7 @@
 	  </view>
 	</view>
 
-	<view class="section">
+	<view class="section panel">
 	  <text class="section_title">休息时长(分钟)</text>
 	  <view class="section_body">
 	    <slider 
@@ -41,7 +41,7 @@
 	  </view>
 	</view>
 
-	<view class="section">
+	<view class="section panel">
 	  <view class="section_title">
 	  	<switch class="section_check" type="checkbox" size="mini" checked bindchange="switch1Change"/>
 	  	<text>启用铃声</text>

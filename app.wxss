@@ -28,11 +28,19 @@ canvas {
 }
 
 .hide {
-	display: none!important;
+  display: none!important;
 }
 
-.container {
+.container,
+input,
+button{
   font: 14px "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
   height: 100%;
-  background-color: #fff;
+  background-color: #f5f5f5;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 3px;
+  padding: 5px 10px;
 }
