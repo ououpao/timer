@@ -37,6 +37,17 @@
 	overflow: hidden;
 	transition: all .3s;
 }
+.timer_progress_mask{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	border:3px solid #1589eb;
+	opacity: .5;
+	border-radius: 50%;
+}
+
 .timer_left {
 	left: 0;
 }
@@ -76,6 +87,16 @@
   color: #fff;
   font-weight: lighter;
   transition: font-size .3s;
+}
+
+.timer_done{
+	width: 64px;
+	height: 64px;
+}
+
+.timer_tipicon{
+	position: absolute;
+	top: 210px;
 }
 
 .timer_inputname {

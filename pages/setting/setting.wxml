@@ -5,7 +5,7 @@
 	    <slider 
 	    	bindchange="changeWorkTime" 
 	    	show-value="true" 
-	    	min="1"
+	    	min="5"
 	    	max="60"
 	    	value="{{workTime}}"
 	    	left-icon="cancel" 

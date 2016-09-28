@@ -8,22 +8,26 @@ const actionName = {
   start: '开始'
 }
 
+const initDeg = {
+  left: 45,
+  right: -45,
+}
+
 Page({
   data: {
-    hideSheetTab: true,
     remainTimeText: '',
     timerType: 'work',
     log: {},
     completed: false,
     isRuning: false,
-    leftDeg: 45,
-    rightDeg: -45
+    leftDeg: initDeg.left,
+    rightDeg: initDeg.right
   },
 
   onShow: function() {
     if (this.data.isRuning) return
-    let workTime = wx.getStorageSync('workTime')
-    let restTime = wx.getStorageSync('restTime')
+    let workTime = util.formatTime(wx.getStorageSync('workTime'), 'HH')
+    let restTime = util.formatTime(wx.getStorageSync('restTime'), 'HH')
     this.setData({
       workTime: workTime,
       restTime: restTime,
@@ -63,6 +67,10 @@ Page({
   },
 
   stopTimer: function() {
+    this.setData({
+      leftDeg: initDeg.left,
+      rightDeg: initDeg.right
+    })
     this.timer && clearInterval(this.timer)
   },
 
@@ -80,9 +88,9 @@ Page({
     let log = this.data.log
     let now = Date.now()
     let remainingTime = Math.round((log.endTime - now) / 1000)
-    let H = util.formatTime(Math.floor(remainingTime / (60 * 60)) % 24, '00')
-    let M = util.formatTime(Math.floor(remainingTime / (60)) % 60, '00')
-    let S = util.formatTime(Math.floor(remainingTime) % 60, '00')
+    let H = util.formatTime(Math.floor(remainingTime / (60 * 60)) % 24, 'HH')
+    let M = util.formatTime(Math.floor(remainingTime / (60)) % 60, 'MM')
+    let S = util.formatTime(Math.floor(remainingTime) % 60, 'SS')
     let halfTime
 
     // update text
@@ -99,14 +107,14 @@ Page({
     halfTime = log.keepTime / 2
     if ((remainingTime * 1000) > halfTime) {
       this.setData({
-        leftDeg: 45 - (180 * (now - log.startTime) / halfTime)
+        leftDeg: initDeg.left - (180 * (now - log.startTime) / halfTime)
       })
     } else {
       this.setData({
         leftDeg: -135
       })
       this.setData({
-        rightDeg: -45 - (180 * (now - (log.startTime + halfTime)) / halfTime)
+        rightDeg: initDeg.right - (180 * (now - (log.startTime + halfTime)) / halfTime)
       })
     }
   },
@@ -121,17 +129,5 @@ Page({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(log)
     wx.setStorageSync('logs', logs)
-  },
-
-  switchSheetTap: function(e) {
-    this.setData({
-      hideSheetTab: !this.data.hideSheetTab
-    })
-  },
-
-  onHide: function(e) {
-    this.setData({
-      hideSheetTab: true
-    })
   }
 })
