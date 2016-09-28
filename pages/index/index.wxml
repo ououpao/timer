@@ -1,6 +1,12 @@
 <view wx:if="{{!completed}}" class="container timer {{isRuning ? 'timer--runing': ''}}">
 	<view class="timer_main">
 		 <view class="timer_time-wrap">
+		 		<view class="timer_progress timer_left">
+		 			<view class="timer_circle timer_circle--left" style="transform: rotate({{leftDeg}}deg);"></view>
+		 		</view>
+		 		<view class="timer_progress timer_right">
+		 			<view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
+		 		</view>
 			 	<text class="timer_time">{{remainTimeText}}</text>
 			 	<!-- <image style="width: 50px;height: 50px;" src="../../image/work.png"></image> -->
 		 </view>

@@ -1,4 +1,13 @@
-var util = require('../../utils/util.js')
+const util = require('../../utils/util.js')
+const logName = {
+  work: '工作',
+  rest: '休息'
+}
+const actionName = {
+  stop: '停止',
+  start: '开始'
+}
+
 Page({
   data: {
     hideSheetTab: true,
@@ -6,11 +15,13 @@ Page({
     timerType: 'work',
     log: {},
     completed: false,
-    isRuning: false
+    isRuning: false,
+    leftDeg: 45,
+    rightDeg: -45
   },
 
   onShow: function() {
-    if(this.data.isRuning) return
+    if (this.data.isRuning) return
     let workTime = wx.getStorageSync('workTime')
     let restTime = wx.getStorageSync('restTime')
     this.setData({
@@ -21,12 +32,11 @@ Page({
   },
 
   startTimer: function(e) {
-
     let startTime = Date.now()
     let isRuning = this.data.isRuning
     let timerType = e.target.dataset.type
     let showTime = this.data[timerType + 'Time']
-    let keepTime =  showTime * 60 * 1000
+    let keepTime = showTime * 60 * 1000
 
     if (isRuning) {
       this.stopTimer()
@@ -41,11 +51,11 @@ Page({
     })
 
     this.data.log = {
-      name: this.logName,
+      name: this.logName || logName[timerType],
       startTime: Date.now(),
       keepTime: keepTime,
       endTime: keepTime + startTime,
-      action: isRuning ? 'stop' : 'start',
+      action: actionName[isRuning ? 'stop' : 'start'],
       type: timerType
     }
 
@@ -73,6 +83,9 @@ Page({
     let H = util.formatTime(Math.floor(remainingTime / (60 * 60)) % 24, '00')
     let M = util.formatTime(Math.floor(remainingTime / (60)) % 60, '00')
     let S = util.formatTime(Math.floor(remainingTime) % 60, '00')
+    let halfTime
+
+    // update text
     if (remainingTime > 0) {
       let remainTimeText = (H === "00" ? "" : (H + ":")) + M + ":" + S
       this.setData({
@@ -80,6 +93,21 @@ Page({
       })
     } else if (remainingTime == 0) {
       this.completeAction()
+    }
+    
+    // update circle progress
+    halfTime = log.keepTime / 2
+    if ((remainingTime * 1000) > halfTime) {
+      this.setData({
+        leftDeg: 45 - (180 * (now - log.startTime) / halfTime)
+      })
+    } else {
+      this.setData({
+        leftDeg: -135
+      })
+      this.setData({
+        rightDeg: -45 - (180 * (now - (log.startTime + halfTime)) / halfTime)
+      })
     }
   },
 

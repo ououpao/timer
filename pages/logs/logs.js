@@ -11,9 +11,16 @@ Page({
     })
     this.getLogs()
   },
+  set: function() {
+
+  },
   getLogs: function() {
+    let logs = wx.getStorageSync('logs')
+    logs.forEach(function(item, index, arry) {
+      item.startTime = new Date(item.startTime).toLocaleString()
+    })
     this.setData({
-      logs: wx.getStorageSync('logs')
+      logs: logs
     })
   },
   onLoad: function() {},

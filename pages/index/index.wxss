@@ -20,20 +20,62 @@
 }
 
 .timer_time-wrap {
+	position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
   height: 150px;
   text-align: center;
-  border-radius: 50%;
-  border: 5px solid #fff;
   transition: all .3s;
+}
+.timer_progress {
+	position: absolute;
+	top: 0;
+	width: 75px;
+	height: 150px;
+	overflow: hidden;
+	transition: all .3s;
+}
+.timer_left {
+	left: 0;
+}
+.timer_right{
+	right: 0;
+}
+.timer_circle {
+	position: absolute;
+	top: 0;
+	width: 150px;
+	height: 150px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  transition: all .3s;
+}
+.timer_circle--left {
+	left: 0;
+	border-left: 3px solid #fff;
+	border-bottom: 3px solid #fff;
+	transform: rotate(45deg);
+}
+
+.timer_circle--right {
+	right: 0;
+	border-right: 3px solid #fff;
+	border-bottom: 3px solid #fff;
+	transform: rotate(-45deg);
+}
+
+
+.timer_time-right {
+	
 }
 
 .timer_time {
   font-size: 40px;
   color: #fff;
+  font-weight: lighter;
+  transition: font-size .3s;
 }
 
 .timer_inputname {
@@ -84,9 +126,21 @@
 	flex:1;
 }
 
+.timer--runing .timer_time{
+	font-size: 45px;
+}
+
 .timer--runing .timer_time-wrap {
   width: 200px;
   height: 200px;
+}
+.timer--runing .timer_progress{
+	width: 100px;
+	height: 200px;
+}
+.timer--runing .timer_circle{
+	width: 200px;
+	height: 200px;
 }
 
 .timer--runing .timer_footer {

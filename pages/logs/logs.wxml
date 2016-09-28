@@ -5,8 +5,9 @@
 	  	<view class="log_item" wx:for="{{logs}}" wx:for-index="$index" wx:for-item="log">
 	  		<text class="log_start">{{log.startTime}}</text>
 	  		<text class="log_action">{{log.action}}</text>
-	  		<text class="log_type">{{log.type}}</text>
-	  		<text class="log_keep">{{log.keepTime}}</text>
+	  		<text class="log_action">{{log.name}}</text>
+	  		<!-- <text class="log_type">{{log.type}}</text>
+	  		<text class="log_keep">{{log.keepTime}}</text> -->
 	  	</view>
 	  </view>
 		
@@ -25,6 +26,9 @@
 	</modal>
 </block>
 <block wx:else>
-	没有记录
+	<view class="nodata">
+		<image class="nodata_img" src="../../image/nodata.png"></image>
+		<text class="nodata_text">暂无记录</text>
+	</view>
 </block>
 <toast hidden="{{toastHidden}}" bindchange="hideToast">清除成功！</toast>
