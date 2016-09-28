@@ -20,7 +20,7 @@
 }
 
 .timer_time-wrap {
-	position: relative;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,58 +29,60 @@
   text-align: center;
   transition: all .3s;
 }
+
 .timer_progress {
-	position: absolute;
-	top: 0;
-	width: 75px;
-	height: 150px;
-	overflow: hidden;
-	transition: all .3s;
+  position: absolute;
+  top: 0;
+  width: 75px;
+  height: 150px;
+  overflow: hidden;
+  transition: all .3s;
 }
-.timer_progress_mask{
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	border:3px solid #1589eb;
-	opacity: .5;
-	border-radius: 50%;
+
+.timer_progress_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 3px solid #1589eb;
+  opacity: .5;
+  border-radius: 50%;
 }
 
 .timer_left {
-	left: 0;
+  left: 0;
 }
-.timer_right{
-	right: 0;
+
+.timer_right {
+  right: 0;
 }
+
 .timer_circle {
-	position: absolute;
-	top: 0;
-	width: 150px;
-	height: 150px;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 150px;
   border: 3px solid transparent;
   border-radius: 50%;
   transition: all .3s;
 }
+
 .timer_circle--left {
-	left: 0;
-	border-left: 3px solid #fff;
-	border-bottom: 3px solid #fff;
-	transform: rotate(45deg);
+  left: 0;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(45deg);
 }
 
 .timer_circle--right {
-	right: 0;
-	border-right: 3px solid #fff;
-	border-bottom: 3px solid #fff;
-	transform: rotate(-45deg);
+  right: 0;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(-45deg);
 }
 
-
-.timer_time-right {
-	
-}
+.timer_time-right {}
 
 .timer_time {
   font-size: 40px;
@@ -89,14 +91,17 @@
   transition: font-size .3s;
 }
 
-.timer_done{
-	width: 64px;
-	height: 64px;
+.timer_taskName {
+  position: absolute;
+  top: -100px;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: #fff;
 }
 
-.timer_tipicon{
-	position: absolute;
-	top: 210px;
+.timer_done {
+  width: 64px;
+  height: 64px;
 }
 
 .timer_inputname {
@@ -128,8 +133,6 @@
   text-align: center;
   font-size: 12px;
   color: #fff;
-  /*color: #3197ed;*/
-  /*border: 1px solid #3197ed;*/
   width: 80px;
   height: 80px;
   margin: 0 20px;
@@ -144,24 +147,26 @@
 /*runing style*/
 
 .timer--runing .timer_main {
-	flex:1;
+  flex: 1;
 }
 
-.timer--runing .timer_time{
-	font-size: 45px;
+.timer--runing .timer_time {
+  font-size: 45px;
 }
 
 .timer--runing .timer_time-wrap {
   width: 200px;
   height: 200px;
 }
-.timer--runing .timer_progress{
-	width: 100px;
-	height: 200px;
+
+.timer--runing .timer_progress {
+  width: 100px;
+  height: 200px;
 }
-.timer--runing .timer_circle{
-	width: 200px;
-	height: 200px;
+
+.timer--runing .timer_circle {
+  width: 200px;
+  height: 200px;
 }
 
 .timer--runing .timer_footer {

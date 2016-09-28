@@ -1,5 +1,5 @@
 const util = require('../../utils/util.js')
-const logName = {
+const defaultLogName = {
   work: '工作',
   rest: '休息'
 }
@@ -14,6 +14,7 @@ const initDeg = {
 }
 
 Page({
+
   data: {
     remainTimeText: '',
     timerType: 'work',
@@ -41,21 +42,27 @@ Page({
     let timerType = e.target.dataset.type
     let showTime = this.data[timerType + 'Time']
     let keepTime = showTime * 60 * 1000
+    let logName = this.logName || defaultLogName[timerType]
 
-    if (isRuning) {
-      this.stopTimer()
+    if (!isRuning) {
+      this.timer = setInterval((function() {
+        this.updateTimer()
+        this.startNameAnimation()
+      }).bind(this), 1000)
     } else {
-      this.timer = setInterval(this.updateTimer.bind(this), 1000)
+      this.stopTimer()
     }
 
     this.setData({
       isRuning: !isRuning,
+      completed: false,
       timerType: timerType,
-      remainTimeText: showTime + ':00'
+      remainTimeText: showTime + ':00',
+      taskName: logName
     })
 
     this.data.log = {
-      name: this.logName || logName[timerType],
+      name: logName,
       startTime: Date.now(),
       keepTime: keepTime,
       endTime: keepTime + startTime,
@@ -66,22 +73,26 @@ Page({
     this.saveLog(this.data.log)
   },
 
+  startNameAnimation: function() {
+    let animation = wx.createAnimation({
+      duration: 450
+    })
+    animation.opacity(0.2).step()
+    animation.opacity(1).step()
+    this.setData({
+      nameAnimation: animation.export()
+    })
+  },
+
   stopTimer: function() {
+    // reset circle progress
     this.setData({
       leftDeg: initDeg.left,
       rightDeg: initDeg.right
     })
+
+    // clear timer
     this.timer && clearInterval(this.timer)
-  },
-
-  setlogName: function(e) {
-    this.logName = e.detail.value
-  },
-
-  linkToLog: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
 
   updateTimer: function() {
@@ -100,9 +111,13 @@ Page({
         remainTimeText: remainTimeText
       })
     } else if (remainingTime == 0) {
-      this.completeAction()
+      this.setData({
+        completed: true
+      })
+      this.stopTimer()
+      return
     }
-    
+
     // update circle progress
     halfTime = log.keepTime / 2
     if ((remainingTime * 1000) > halfTime) {
@@ -119,10 +134,8 @@ Page({
     }
   },
 
-  completeAction: function() {
-    this.setData({
-      completed: true
-    })
+  changeLogName: function(e) {
+    this.logName = e.detail.value
   },
 
   saveLog: function(log) {

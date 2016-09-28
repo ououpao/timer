@@ -1,4 +1,3 @@
-<!--logs.wxml-->
 <block wx:if="{{logs.length}}">
 	<scroll-view class="container" scroll-y="true">
 	  <view class="log panel">
@@ -6,8 +5,6 @@
 	  		<text class="log_start">{{log.startTime}}</text>
 	  		<text class="log_action">{{log.action}}</text>
 	  		<text class="log_action">{{log.name}}</text>
-	  		<!-- <text class="log_type">{{log.type}}</text>
-	  		<text class="log_keep">{{log.keepTime}}</text> -->
 	  	</view>
 	  </view>
 		

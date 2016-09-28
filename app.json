@@ -19,7 +19,7 @@
       "pagePath": "pages/index/index",
       "iconPath": "image/wechat.png",
       "selectedIconPath": "image/wechatHL.png",
-      "text": "Timer"
+      "text": "主页"
     }, {
       "pagePath": "pages/logs/logs",
       "iconPath": "image/wechat.png",

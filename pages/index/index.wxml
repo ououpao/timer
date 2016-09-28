@@ -9,14 +9,20 @@
 		 			<view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
 		 		</view>
 			 	<text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
-		 		<image wx:if="{{completed}}" class="timer_done" src="../../image/complete.png"></image>
-		 		<image wx:if="{{isRuning}}" class="timer_tipicon" src="../../image/{{timerType}}.png"></image>
+			 	<text 
+			 		wx:if="{{isRuning}}" 
+			 		animation="{{nameAnimation}}" 
+			 		class="timer_taskName">{{taskName}}{{completed ? '已完成！' : '中'}}</text>
+		 		<image 
+		 			wx:if="{{completed}}" 
+		 			class="timer_done" 
+		 			src="../../image/complete.png"></image>
 		 </view>
 		 <input 
 		 	type="text" 
 		 	placeholder-style="text-align:center" 
 		 	class="timer_inputname" 
-		 	bindinput="setTaskName"
+		 	bindinput="changeLogName"
 		 	placeholder="给您的任务取个名字吧"/>
 	</view>
 	
