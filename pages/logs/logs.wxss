@@ -16,6 +16,7 @@
 	position: absolute;
 	bottom: 0px;
 	width: 100%;
+  text-align: center;
 }
 .clear .clear_btn {
 	margin: 10px;
@@ -24,4 +25,5 @@
 	color:#fff;
 	background-color: #fd8f58;
 	border-radius: 2px;
+  width: 80%;
 }

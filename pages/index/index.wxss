@@ -12,11 +12,11 @@
   flex: 2;
   justify-content: center;
   align-items: center;
-  margin-top: -45px;
   text-align: center;
   background-color: #3197ed;
   transition: all .5s;
   z-index: 1;
+  padding: 10px 0;
 }
 
 .timer_time-wrap {
@@ -123,8 +123,6 @@
   padding-top: 40px;
   transition: all .3s;
 }
-
-.timer_footer > button {}
 
 .timer .timer_ctrl {
   display: flex;

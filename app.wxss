@@ -26,6 +26,9 @@ map,
 canvas {
   box-sizing: border-box;
 }
+page {
+  height: 100%;
+}
 
 .hide {
   display: none!important;
