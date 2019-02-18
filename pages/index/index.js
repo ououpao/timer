@@ -1,146 +1,107 @@
-const util = require('../../utils/util.js')
-const defaultLogName = {
-  work: '工作',
-  rest: '休息'
-}
-const actionName = {
-  stop: '停止',
-  start: '开始'
-}
-
-const initDeg = {
-  left: 45,
-  right: -45,
-}
-
+//index.js
+//获取应用实例
+var app = getApp()
 Page({
-
   data: {
-    remainTimeText: '',
-    timerType: 'work',
-    log: {},
-    completed: false,
-    isRuning: false,
-    leftDeg: initDeg.left,
-    rightDeg: initDeg.right
+    motto: 'MiHome_Store',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 100,
+    "banner_list": [
+      {
+        "banner": [
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_904608692a4d8415d0de39a0a5897e80.jpeg&w=1080&h=600&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_0f5e43035a8b8d27a4b6f315d222fd9b.jpeg&w=1080&h=600&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_4ba3d814639ab27570f174467133619f.png&w=1080&h=600&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_91f29509f14ea243958285aaf5d5b640.jpeg&w=1080&h=600&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_5c752db8097555831469356f5f389078.jpeg&w=1080&h=600&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          }
+        ]
+      },
+      {
+        "banner": [
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_3237b46c5de819816125d88e9d06b7bf.jpg&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_c02bce3048058edb194dc3efb230d06b.jpg&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_45b3c9ed56aef44994176b50ae5d8a69.jpg&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+          },
+          {
+            "pic_url": "http://static.home.mi.com/app/shop/img?id=shop_95583f54ee857e8fa5f4cf1b9f791a74.jpg&crop=a_0_120_1080_480&t=webp&z=1.15&q=78",
+
+          }
+        ]
+      }
+    ],
+    hotgoods: [
+      {
+        "name": "番茄工作法",
+        "isTab": true,
+        "url":"../todos/todos",
+        "summary": "提升工作效率",
+        "ext_tag": "http://static.home.mi.com/app/shop/img?id=shop_9d57f6e89d1f560b7bce31e0b85a7285.png&w=420&h=240&crop=a_0_120_1080_480&t=png",
+        "pic_url": "../../images/timer/pomodoro.png"
+      },
+    ]
   },
-
-  onShow: function() {
-    if (this.data.isRuning) return
-    let workTime = util.formatTime(wx.getStorageSync('workTime'), 'HH')
-    let restTime = util.formatTime(wx.getStorageSync('restTime'), 'HH')
-    this.setData({
-      workTime: workTime,
-      restTime: restTime,
-      remainTimeText: workTime + ':00'
-    })
-  },
-
-  startTimer: function(e) {
-    let startTime = Date.now()
-    let isRuning = this.data.isRuning
-    let timerType = e.target.dataset.type
-    let showTime = this.data[timerType + 'Time']
-    let keepTime = showTime * 60 * 1000
-    let logName = this.logName || defaultLogName[timerType]
-
-    if (!isRuning) {
-      this.timer = setInterval((function() {
-        this.updateTimer()
-        this.startNameAnimation()
-      }).bind(this), 1000)
+  onLoad: function () {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
     } else {
-      this.stopTimer()
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
     }
+  },
 
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
     this.setData({
-      isRuning: !isRuning,
-      completed: false,
-      timerType: timerType,
-      remainTimeText: showTime + ':00',
-      taskName: logName
-    })
-
-    this.data.log = {
-      name: logName,
-      startTime: Date.now(),
-      keepTime: keepTime,
-      endTime: keepTime + startTime,
-      action: actionName[isRuning ? 'stop' : 'start'],
-      type: timerType
-    }
-
-    this.saveLog(this.data.log)
-  },
-
-  startNameAnimation: function() {
-    let animation = wx.createAnimation({
-      duration: 450
-    })
-    animation.opacity(0.2).step()
-    animation.opacity(1).step()
-    this.setData({
-      nameAnimation: animation.export()
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
     })
   },
 
-  stopTimer: function() {
-    // reset circle progress
-    this.setData({
-      leftDeg: initDeg.left,
-      rightDeg: initDeg.right
+  switchTab:function(e){
+    var hotgoods = this.data.hotgoods;
+    wx.switchTab({
+      "url": hotgoods[e.currentTarget.id].url,
     })
-
-    // clear timer
-    this.timer && clearInterval(this.timer)
   },
-
-  updateTimer: function() {
-    let log = this.data.log
-    let now = Date.now()
-    let remainingTime = Math.round((log.endTime - now) / 1000)
-    let H = util.formatTime(Math.floor(remainingTime / (60 * 60)) % 24, 'HH')
-    let M = util.formatTime(Math.floor(remainingTime / (60)) % 60, 'MM')
-    let S = util.formatTime(Math.floor(remainingTime) % 60, 'SS')
-    let halfTime
-
-    // update text
-    if (remainingTime > 0) {
-      let remainTimeText = (H === "00" ? "" : (H + ":")) + M + ":" + S
-      this.setData({
-        remainTimeText: remainTimeText
-      })
-    } else if (remainingTime == 0) {
-      this.setData({
-        completed: true
-      })
-      this.stopTimer()
-      return
-    }
-
-    // update circle progress
-    halfTime = log.keepTime / 2
-    if ((remainingTime * 1000) > halfTime) {
-      this.setData({
-        leftDeg: initDeg.left - (180 * (now - log.startTime) / halfTime)
-      })
-    } else {
-      this.setData({
-        leftDeg: -135
-      })
-      this.setData({
-        rightDeg: initDeg.right - (180 * (now - (log.startTime + halfTime)) / halfTime)
-      })
-    }
-  },
-
-  changeLogName: function(e) {
-    this.logName = e.detail.value
-  },
-
-  saveLog: function(log) {
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(log)
-    wx.setStorageSync('logs', logs)
-  }
 })
