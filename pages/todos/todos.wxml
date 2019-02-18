@@ -8,17 +8,15 @@
   <text style="display: {{draft ? 'inline': 'none'}}" class="add tappable" ontap="addTodo">添加</text>
 </view>
 <view class="todo-list">
-<block wx:for="{{todos}}" wx:for-item="todo" wx:key="objectId">
+<block wx:for="{{todos}}" wx:for-item="todo" wx:for-index="objectId" wx:key="objectId">
   <view class="flex-wrap todo">
     <icon
       type="{{todo.done ? 'success_circle' : 'circle'}}" 
-      data-id="{{todo.objectId}}" 
+      data-id="{{todo.id}}" 
       ontap="toggleDone"
       class="todo-icon tappable" 
       size="24"/>
-    <text
-      wx:if="{{todo.objectId != editedTodo.objectId}}"
-      data-id="{{todo.objectId}}" 
+    <text data-id="{{todo.id}}" 
       class="todo-text tappable {{todo.done ? 'done': ''}}"
       ontap="goTodo">
       {{todo.content}}

@@ -1,5 +1,5 @@
 // pages/todos/todos.js
-
+const util = require('../../utils/util.js')
 Page({
 
   /**
@@ -87,16 +87,17 @@ Page({
       return;
     }
     let newTodo = this.data.todos;
-    var sizes = newTodo.length;
-    var sizes= sizes +1;
     newTodo.push({
-      id: sizes,
-      objectId: sizes,
+      id: util.formatDate(new Date()),
       done: false,
       content: value
     });
+    const activeTodos = newTodo.filter(todo => !todo.done);
+    wx.setStorageSync("todos", newTodo);
+    wx.setStorageSync("activeTodos", activeTodos);
     this.setData({
       todos: newTodo,
+      activeTodos,
       draft: ''
     });
   },
@@ -149,9 +150,12 @@ Page({
   }) {
     const currentToDo = this.data.todos.filter(todo => todo.id === id)[0] || {};
     console.log(currentToDo)
-    wx.navigateTo({
-      url: '../task/task?name=' + currentToDo.content,
-    });
+    if (!currentToDo.done){
+      wx.navigateTo({
+        url: '../task/task?name=' + currentToDo.content,
+      });
+    }
+    
   },
   setting: function () {
     wx.navigateTo({
