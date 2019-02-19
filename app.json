@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/todos/todos",
+    "pages/task/task",
     "pages/logs/logs",
+    "pages/timeset/timeset",
     "pages/setting/setting"
   ],
   "window": {
@@ -11,25 +14,26 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#dddddd",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "iconPath": "image/wechat.png",
-      "selectedIconPath": "image/wechatHL.png",
-      "text": "主页"
-    }, {
-      "pagePath": "pages/logs/logs",
-      "iconPath": "image/wechat.png",
-      "selectedIconPath": "image/wechatHL.png",
-      "text": "记录"
-    }, {
-      "pagePath": "pages/setting/setting",
-      "iconPath": "image/wechat.png",
-      "selectedIconPath": "image/wechatHL.png",
-      "text": "设置"
-    }]
+    "position": "bottom",
+    "list": [
+      {
+        "iconPath": "images/home_48px.png",
+        "selectedIconPath": "images/home_48px.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/checkout_shoppingcart_48px.png",
+        "selectedIconPath": "images/checkout_shoppingcart_48px.png",
+        "pagePath": "pages/todos/todos",
+        "text": "今日待办"
+      },
+      {
+        "iconPath": "images/manage_user_48px.png",
+        "selectedIconPath": "images/manage_user_48px.png",
+        "pagePath": "pages/timeset/timeset",
+        "text": "我的"
+      }
+    ]
   }
 }
